@@ -626,10 +626,11 @@
 
 /* ── Featured card (spotlight first item, horizontal & hero products) ──── */
 :where(.avdeb-card--featured) {
+    --avdeb-card-display: grid;
+    --avdeb-card-min: clamp(17rem, 38cqi, 25rem);
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
     align-items: stretch;
-    min-block-size: clamp(17rem, 38cqi, 25rem);
 }
 
 /* The image fills its column (cover) instead of forcing a tall square. */
@@ -701,8 +702,8 @@
 }
 
 :where(.avdeb-card--hero) {
+    --avdeb-card-min: clamp(20rem, 48cqi, 32rem);
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    min-block-size: clamp(20rem, 48cqi, 32rem);
 }
 
 :where(.avdeb-card--hero) :where(.avdeb-card__title) {
@@ -722,8 +723,8 @@
 
 @container avdeb (max-width: 34rem) {
     :where(.avdeb-card--featured, .avdeb-card--hero) {
+        --avdeb-card-min: 0;
         grid-template-columns: minmax(0, 1fr);
-        min-block-size: 0;
     }
 
     :where(.avdeb-card--featured) :where(.avdeb-card__media) {
@@ -780,12 +781,14 @@
     list-style: none;
 }
 
-/* Cards are <article>s: themes that style `article { padding; max-width; background }` must not
-   reach them. Restyle with --avdeb-card-bg / --avdeb-card-pad. */
+/* Cards are <article>s: themes that style `article { display; padding; max-width; background }`
+   (normalize.css sets `article { display: block }`) must not reach them. Restyle with
+   --avdeb-card-bg / --avdeb-card-pad. */
 .avdeb .avdeb__item > .avdeb-card {
+    display: var(--avdeb-card-display, flex);
     inline-size: 100%;
     max-inline-size: none;
-    min-block-size: 0;
+    min-block-size: var(--avdeb-card-min, 0);
     margin: 0;
     padding: var(--avdeb-card-pad, 0);
     background: var(--avdeb-card-bg);

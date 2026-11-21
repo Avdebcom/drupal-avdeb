@@ -11,7 +11,8 @@ MODULE="$(cd "$(dirname "$0")/.." && pwd)"
 IMAGE="${AVDEB_DRUPAL_IMAGE:-drupal:11-apache}"
 
 docker rm -f "$NAME" >/dev/null 2>&1 || true
-docker run -d --name "$NAME" -p "$PORT:80" -v "$MODULE:/opt/drupal/web/modules/contrib/avdeb:ro" "$IMAGE" >/dev/null
+# Apache starts only after the install, so the port refuses connections until the site is ready.
+docker run -d --name "$NAME" -p "$PORT:80" -v "$MODULE:/opt/drupal/web/modules/contrib/avdeb:ro" "$IMAGE" sleep infinity >/dev/null
 docker exec "$NAME" bash -c '
   set -e
   cd /opt/drupal
@@ -26,4 +27,9 @@ docker exec "$NAME" bash -c '
   vendor/bin/drush cache:rebuild --quiet
   chown -R www-data:www-data web/sites/default/files
 '
+docker exec -d "$NAME" apache2-foreground
+for _ in $(seq 1 60); do
+  curl -s -o /dev/null "http://localhost:$PORT/user/login" && break
+  sleep 0.5
+done
 echo "Drupal ready: http://localhost:$PORT (admin / admin)"
