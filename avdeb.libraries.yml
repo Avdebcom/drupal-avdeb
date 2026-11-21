@@ -1,0 +1,8 @@
+embed:
+  css:
+    component:
+      css/avdeb.css: {}
+  js:
+    js/avdeb.js: {}
+  dependencies:
+    - core/drupal

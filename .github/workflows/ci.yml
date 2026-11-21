@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ["8.1", "8.3", "8.4"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: intl, mbstring
+      - name: Lint
+        run: find . -name '*.php' -o -name '*.module' -o -name '*.install' | xargs -n1 php -l
+      - name: Unit tests
+        run: php tests/run.php
+
+  drupal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install on Drupal 11 and render an article
+        run: |
+          tests/dev-site.sh avdeb-ci 8090
+          docker exec -u www-data -w /opt/drupal avdeb-ci vendor/bin/drush config:set avdeb.settings ref_code CITEST -y
+          docker exec -u www-data -w /opt/drupal avdeb-ci vendor/bin/drush php:eval '\Drupal::entityTypeManager()->getStorage("node")->create(["type"=>"article","title"=>"CI","body"=>["value"=>"<p>{avdeb-products https://avdeb.com/category/stickers/ limit=&quot;3&quot;}</p>","format"=>"basic_html"],"status"=>1])->save();'
+          curl -sf http://localhost:8090/node/1 -o node.html
+          grep -q 'class="avdeb ' node.html
+          ! grep -q '{avdeb-' node.html

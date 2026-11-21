@@ -1,0 +1,7 @@
+avdeb.settings:
+  path: '/admin/config/content/avdeb'
+  defaults:
+    _form: '\Drupal\avdeb\Form\SettingsForm'
+    _title: 'AVDEB Products'
+  requirements:
+    _permission: 'administer avdeb'

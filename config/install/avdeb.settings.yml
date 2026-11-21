@@ -1,0 +1,17 @@
+api_key: ''
+ref_code: ''
+layout: grid
+columns: 3
+card_style: elevated
+theme: site
+accent_color: ''
+radius: 16
+image_ratio: square
+cta_label: 'View product'
+show_price: true
+show_creator: true
+show_badges: true
+new_tab: false
+show_disclosure: true
+disclosure_text: 'As an AVDEB affiliate, I earn a commission from qualifying purchases.'
+cache_minutes: 360

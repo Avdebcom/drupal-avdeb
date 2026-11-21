@@ -1,0 +1,4 @@
+administer avdeb:
+  title: 'Administer AVDEB Products'
+  description: 'Change the referral code, secret key and display defaults.'
+  restrict access: true

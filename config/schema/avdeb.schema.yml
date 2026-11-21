@@ -1,0 +1,81 @@
+avdeb.settings:
+  type: config_object
+  label: 'AVDEB Products settings'
+  mapping:
+    api_key:
+      type: string
+      label: 'Secret key'
+    ref_code:
+      type: string
+      label: 'Referral code'
+    layout:
+      type: string
+      label: 'Default layout'
+    columns:
+      type: integer
+      label: 'Default columns'
+    card_style:
+      type: string
+      label: 'Card style'
+    theme:
+      type: string
+      label: 'Colour theme'
+    accent_color:
+      type: string
+      label: 'Accent colour'
+    radius:
+      type: integer
+      label: 'Corner radius'
+    image_ratio:
+      type: string
+      label: 'Image shape'
+    cta_label:
+      type: label
+      label: 'Button text'
+    show_price:
+      type: boolean
+      label: 'Show prices'
+    show_creator:
+      type: boolean
+      label: 'Show designer name'
+    show_badges:
+      type: boolean
+      label: 'Show Sale / New badges'
+    new_tab:
+      type: boolean
+      label: 'Open links in a new tab'
+    show_disclosure:
+      type: boolean
+      label: 'Affiliate disclosure'
+    disclosure_text:
+      type: label
+      label: 'Disclosure text'
+    cache_minutes:
+      type: integer
+      label: 'Refresh products every (minutes)'
+
+block.settings.avdeb_products:
+  type: block_settings
+  label: 'AVDEB Products block'
+  mapping:
+    link:
+      type: string
+      label: 'AVDEB link or search'
+    layout:
+      type: string
+      label: 'Layout'
+    limit:
+      type: integer
+      label: 'Products'
+    columns:
+      type: integer
+      label: 'Columns'
+    heading:
+      type: label
+      label: 'Heading'
+    card_style:
+      type: string
+      label: 'Card style'
+    theme:
+      type: string
+      label: 'Colour theme'

@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for AVDEB Products.
+ */
+
+declare(strict_types=1);
+
+use Drupal\filter\Entity\FilterFormat;
+
+/**
+ * Implements hook_install().
+ *
+ * Turns on "AVDEB product tags" in the Basic HTML and Full HTML text formats (when they exist), after
+ * every other filter, so the tags work in body fields right away.
+ */
+function avdeb_install(bool $is_syncing): void {
+  if ($is_syncing) {
+    return;
+  }
+  foreach (['basic_html', 'full_html'] as $id) {
+    $format = FilterFormat::load($id);
+    // filters() lists every available filter, enabled or not: check the stored status instead.
+    if ($format && empty($format->filters()->getConfiguration()['avdeb_embeds']['status'])) {
+      $format->setFilterConfig('avdeb_embeds', ['status' => TRUE, 'weight' => 100])->save();
+    }
+  }
+}

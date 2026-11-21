@@ -1,0 +1,13 @@
+services:
+  cache.avdeb:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: ['@cache_factory', 'get']
+    arguments: [avdeb]
+  avdeb.embeds:
+    class: Drupal\avdeb\Embeds
+    arguments: ['@config.factory', '@cache.avdeb', '@http_client', '@language_manager', '@logger.channel.avdeb']
+  logger.channel.avdeb:
+    parent: logger.channel_base
+    arguments: ['avdeb']

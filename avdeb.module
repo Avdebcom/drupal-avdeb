@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * AVDEB Products: help page.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function avdeb_help(string $route_name, RouteMatchInterface $route_match): ?string {
+  if ($route_name !== 'help.page.avdeb') {
+    return NULL;
+  }
+  $settings = Url::fromRoute('avdeb.settings')->toString();
+  return '<h2>' . t('AVDEB Products') . '</h2>'
+    . '<p>' . t('Show AVDEB products (a creator shop, a category, a search or one product) with your affiliate referral code on every link.') . '</p>'
+    . '<ol>'
+    . '<li>' . t('Add your referral code or secret key on the <a href=":url">settings page</a>.', [':url' => $settings]) . '</li>'
+    . '<li>' . t('In any body field that uses Basic HTML or Full HTML, type <code>{avdeb-products https://avdeb.com/category/stickers/ layout="carousel"}</code>, <code>{avdeb-product https://avdeb.com/store/…/}</code> or <code>{avdeb-button href="/creators/…/" label="Visit my shop"}</code>.') . '</li>'
+    . '<li>' . t('Or place the <em>AVDEB Products</em> block in a region under Structure → Block layout.') . '</li>'
+    . '</ol>';
+}

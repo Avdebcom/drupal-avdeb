@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="avdeb">
+  <description>Drupal coding standards for AVDEB Products.</description>
+  <file>.</file>
+  <arg name="extensions" value="php,module,install,yml,js,css,info"/>
+  <!-- tests/ is a standalone runner (php tests/run.php), not Drupal code. -->
+  <exclude-pattern>tests/*</exclude-pattern>
+  <exclude-pattern>vendor/*</exclude-pattern>
+  <rule ref="Drupal"/>
+  <rule ref="DrupalPractice"/>
+</ruleset>

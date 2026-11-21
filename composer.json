@@ -1,0 +1,17 @@
+{
+    "name": "drupal/avdeb",
+    "type": "drupal-module",
+    "description": "Show AVDEB products (a creator shop, a category, a search or one product) in content and blocks, with your affiliate referral code on every link.",
+    "keywords": ["Drupal", "affiliate", "products", "embed", "avdeb"],
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/avdeb",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/avdeb",
+        "source": "https://github.com/Avdebcom/drupal-avdeb",
+        "docs": "https://avdeb.com/developers/#drupal"
+    },
+    "require": {
+        "php": ">=8.1",
+        "drupal/core": "^10.3 || ^11"
+    }
+}
